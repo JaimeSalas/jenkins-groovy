@@ -10,7 +10,8 @@ node {
             sh 'dotnet --version'
             sh 'dotnet build ./console-app-1/ConsoleApp1'
             echo 'Building new feature'
-            releasenotes()
+            // releasenotes()
+            releasenotes(changes:"false")
         } catch (ex) {
             echo 'Something went wrong'
             echo ex.toString();
