@@ -5,10 +5,18 @@ node {
     }
 
     stage('Build') {
-        echo 'Building...'
-        sh 'dotnet --version'
-        sh 'dotnet build ./console-app-1/ConsoleApp1'
-        echo 'Building new feature'
+        try {
+            echo 'Building...'
+            sh 'dotnet --version'
+            sh 'dotnet build ./console-app-1/ConsoleApp1'
+            echo 'Building new feature'
+        } catch (ex) {
+            echo 'Something went wrong'
+            echo ex.toString();
+            currentBuild.result = 'FAILURE'
+        } finally {
+            // cleanup
+        }
     }
     
     stage('Test') {
